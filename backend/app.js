@@ -1,24 +1,20 @@
-// const express = require('express');
+import 'dotenv/config'
+console.log("DB_SERVER:", process.env.DB_SERVER)
 import express from  'express'
-// const cors = require('cors');
-import publicRoutes from
-
-
-require('dotenv').config();
-
-const { connectDB } = require('./database/connection');
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
+import publicRoutes from './routes/public.js'
+import privateRoutes from './routes/private.js'
+import {connectDB} from './routes/connection.js'
+import auth from './middlewares/auth.js'
 
 connectDB();
 
-app.get('/', (req, res) => {
-  res.send('API funcionando!');
-});
+const app = express()
+app.use(express.json())
+app.use('/',publicRoutes)
+app.use('/', auth,privateRoutes)
 
-app.listen(3000, () => {
-  console.log('Servidor rodando na porta 3000');
-});
+// app.get('/', (req, res) => {
+//   res.send('API funcionando!');
+// });
+
+app.listen(3000, () => console.log('Servidor rodando!!'));

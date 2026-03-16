@@ -1,5 +1,4 @@
-const sql = require('mssql');
-require('dotenv').config();
+import sql from 'mssql'
 
 const config = {
   user: process.env.DB_USER,
@@ -22,7 +21,4 @@ async function connectDB() {
   }
 }
 
-module.exports = {
-  sql,
-  connectDB
-};
+export { sql, connectDB }

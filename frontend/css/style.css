@@ -1,0 +1,92 @@
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    width: 500px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+a{
+    color: #544bf5;
+    transition: 0.5s;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+a:hover{
+    color: #2e2990;
+}
+
+/* Título */
+h1 {
+    color: #333;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Fundo */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1b632a, #2f3f70);
+}
+
+/* Container automático */
+body > * {
+    width: 300px;
+}
+
+
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+}
+
+/* Foco */
+input:focus {
+    outline: 2px solid #4f46e5;
+}
+
+/* Botão */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #0f0b4f;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Hover */
+button:hover {
+    background: #3730a3;
+}
+
+/* Mensagem */
+#mensagem {
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+}

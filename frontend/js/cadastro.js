@@ -16,7 +16,7 @@ async function fazercadastro() {
             mensagem.style.color = "red"
             setTimeout(() => {
                 mensagem.textContent = "";
-                mensagem.style.color = "white"
+                mensagem.style.color = "black"
             }, 8000);
         }
 

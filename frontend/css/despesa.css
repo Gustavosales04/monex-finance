@@ -1,0 +1,98 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Fundo */
+body {
+    background: linear-gradient(135deg, #1b632a, #2f3f70);
+    padding: 20px;
+}
+
+/* Container */
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Título */
+h1 {
+    color: #f4f2f2;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Form */
+.form {
+    background: #f4f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+.form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Botão */
+.form button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #4f46e5;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.form button:hover {
+    background: #3730a3;
+}
+
+/* Lista */
+#lista-despesas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Card de despesa */
+.despesa {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Info */
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.valor {
+    font-weight: bold;
+    color: #dc2626;
+}
+
+/* Botão deletar */
+.delete {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}

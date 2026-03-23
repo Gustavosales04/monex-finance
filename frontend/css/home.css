@@ -1,0 +1,21 @@
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #1b632a, #2f3f70);
+}
+
+.container {
+    margin: auto;
+    display: flex;
+    background: #f4f2f2;
+    padding: 40px;
+    border-radius: 10px;
+    width: 600px;
+    height: 450px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+h1{
+    color: #f4f2f2;
+    text-align: center;
+
+}

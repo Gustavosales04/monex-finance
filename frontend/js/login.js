@@ -14,10 +14,16 @@ async function fazerlogin() {
             setTimeout(() => {
                 mensagem.textContent = "";
             }, 8000);
+        }else{
+            localStorage.setItem("token", data)
+            setTimeout(() => {
+                window.location.href = "home.html";
+            }, 1500);
+
         }
 
     } catch{
-        console
+        console.log("Erro ao tentar logar")
     }
 
 }

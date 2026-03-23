@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/despesa.css">
+    <script src="../js/api.js"></script>
+    <script src="../js/despesa.js"></script>
+    <title>Despesas</title>
+</head>
+<body>
+    <div class="container">
+
+    <h1>Minhas Despesas</h1>
+
+    <!-- Formulário -->
+    <div class="form">
+        <input id="descricao" placeholder="Descrição">
+        <input id="valor" type="number" placeholder="Valor">
+        <input id="data" type="date">
+        <button onclick="cadastrardespesa()">Adicionar</button>
+    </div>
+
+    <!-- Lista -->
+    <div id="lista-despesas"></div>
+
+</div>
+</body>
+</html>

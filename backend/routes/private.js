@@ -13,7 +13,7 @@ router.post('/criar-despesa', async (req,res) => {
         VALUES
         (${info.valor},${info.data},${info.descricao},${info.categoriaid}, ${userid})
         `
-        res.status(202).json({message: 'despesa criada com sucesso'},despesa)
+        res.status(202).json({message: 'despesa criada com sucesso'})
     }
     catch(err){
         //Logs de Erro

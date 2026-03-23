@@ -3,6 +3,42 @@ import { sql } from './connection.js'
 
 const router = express.Router()
 
+router.post('/criar-despesa', async (req,res) => {
+    try{
+        const info = req.body
+        const userid = req.userId
+        const despesa = await sql.query`
+        INSERT INTO Despesa
+        (Valor,Data,Descricao, CategoriaId,UsuarioId)
+        VALUES
+        (${info.valor},${info.data},${info.descricao},${info.categoriaid}, ${userid})
+        `
+        res.status(202).json({message: 'despesa criada com sucesso'},despesa)
+    }
+    catch(err){
+        //Logs de Erro
+        console.log(err)
+        res.status(500).json({message: 'Erro ao criar categoria, tente novamente'})
+    }
+})
+
+router.get('/listar-despesa', async (req,res) => {
+    try{   
+        const userid = req.userid
+
+        const despesa = await sql.query`
+        SELECT Descricao FROM Despesa
+        WHERE UsuarioId = ${userid}
+        `
+        res.status(202).json(despesa.recordset)
+    }
+    catch(err){
+        //Logs de Erro
+        console.log(err)
+        res.status(500).json({message: 'Erro ao listar despesa, tente novamente'})
+    }
+})
+
 router.post('/criar-categoria', async (req,res) => {
     try{
         const nome = req.body
@@ -23,8 +59,7 @@ router.post('/criar-categoria', async (req,res) => {
 })
 
 router.get('/listar-categoria', async (req,res) => {
-    try{
-        
+    try{   
         const userid = req.userid
 
         const categoria = await sql.query`

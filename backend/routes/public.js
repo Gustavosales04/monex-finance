@@ -12,17 +12,40 @@ router.post('/cadastro', async (req, res) => {
     try{
         //Salva as informações do 'req' na variavel 'user'
         const user = req.body
+
+        // Validação de campos
+        if (!user.name || !user.email || !user.password) {
+            return res.status(400).json({
+            message: "Preencha todos os campos."
+        })}
+
         //Incryptação de Senha
         const salt = await bcrypt.genSalt(10)
         const hashPassword = await bcrypt.hash(user.password,salt)
+        
+        // validação de email e senha
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const regexSenha = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+        const JaCadastrado = await sql.query`
+            SELECT 1 FROM Usuario
+            WHERE Email = ${user.email}`;      
+        
+        if (JaCadastrado.recordset.length > 0 || !regexEmail.test(user.email)){
+            return res.status(400).json({message: "Email já existe ou é inválido."});
+        }
+        
+        if(!regexSenha.test(user.password)){
+            return res.status(400).json({message: "Senha não atende aos requisitos."})
+        }
 
         //Insere o Usuário no banco de dados
         const result = await sql.query`
         INSERT INTO Usuario(Nome, Email, Senha)
         VALUES (${user.name},${user.email},${hashPassword})
         `
-        //Temp(Devolve as informações do Usuario)
-        res.status(201).json(result)
+        //Devolve status
+        res.status(201).json({message: "Usuario cadastrado com sucesso!"})
     }
     catch(err){
         //Logs de Erro
@@ -45,7 +68,7 @@ router.post("/login", async (req,res) =>{
 
         //Verifica se o Usuário existe
         if(user.recordset.length === 0){
-            return res.status(400).json({massage: 'Usuário não encontrato'})
+            return res.status(400).json({message: 'Usuário não encontrato'})
         }
 
         //Verifica se a Senha está correta

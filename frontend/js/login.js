@@ -17,7 +17,7 @@ async function fazerlogin() {
         }else{
             localStorage.setItem("token", data)
             setTimeout(() => {
-                window.location.href = "home.html";
+                window.location.href = "despesa.html";
             }, 1500);
 
         }

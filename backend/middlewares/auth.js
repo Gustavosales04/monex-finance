@@ -13,7 +13,6 @@ const auth = (req,res,next) =>{
     try{
         
         const decoded = jwt.verify(token.replace('Bearer ', ''), JWT_SECRET)
-
         req.userId = decoded.id
 
     }catch(err){

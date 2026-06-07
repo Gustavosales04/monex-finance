@@ -7,6 +7,7 @@ router.post('/criar-despesa', async (req,res) => {
     try{
         const info = req.body
         const userid = req.userId
+        console.log(info)
         const despesa = await sql.query`
         INSERT INTO Despesa
         (Valor,Data,Descricao, CategoriaId,UsuarioId)
@@ -23,12 +24,19 @@ router.post('/criar-despesa', async (req,res) => {
 })
 
 router.get('/listar-despesa', async (req,res) => {
-    try{   
-        const userid = req.userid
-
+    try{        
+        const userid = req.userId
         const despesa = await sql.query`
-        SELECT Descricao FROM Despesa
-        WHERE UsuarioId = ${userid}
+        SELECT
+        d.Id         AS id,
+        d.Descricao  AS descricao,
+        c.Nome       AS categoria,
+        d.Valor      AS valor,
+        d.Data       AS data
+        FROM Despesa d
+        inner join Categoria c on d.CategoriaId = c.Id
+        WHERE d.UsuarioId = ${userid}
+        ORDER BY d.Data DESC
         `
         res.status(202).json(despesa.recordset)
     }
@@ -36,6 +44,49 @@ router.get('/listar-despesa', async (req,res) => {
         //Logs de Erro
         console.log(err)
         res.status(500).json({message: 'Erro ao listar despesa, tente novamente'})
+    }
+})
+
+router.get('/listar-despesa-mes', async (req,res) => {
+    try{        
+        const userid = req.userId
+        const despesa = await sql.query`
+        SELECT
+        d.Id         AS id,
+        d.Descricao  AS descricao,
+        c.Nome       AS categoria,
+        d.Valor      AS valor,
+        d.Data       AS data
+        FROM Despesa d
+        inner join Categoria c on d.CategoriaId = c.Id
+        WHERE d.UsuarioId = ${userid}
+        AND MONTH(d.Data) = MONTH(GETDATE()) 
+        AND YEAR(d.Data) = YEAR(GETDATE())
+        ORDER BY d.Data DESC
+        `
+        res.status(202).json(despesa.recordset)
+    }
+    catch(err){
+        //Logs de Erro
+        console.log(err)
+        res.status(500).json({message: 'Erro ao listar despesa, tente novamente'})
+    }
+})
+
+router.delete('/deletar-despesa', async (req,res) => {
+    try{
+        const id = req.body.id
+        const userid = req.userId
+        const despesa = await sql.query`
+        DELETE FROM Despesa
+        WHERE Id = ${id} AND UsuarioId = ${userid}
+        `
+        res.status(202).json({message: 'Despesa deletada com sucesso'})
+    }
+    catch(err){
+        //Logs de Erro
+        console.log(err)
+        res.status(500).json({message: 'Erro ao deletar despesa, tente novamente'})
     }
 })
 
@@ -60,10 +111,10 @@ router.post('/criar-categoria', async (req,res) => {
 
 router.get('/listar-categoria', async (req,res) => {
     try{   
-        const userid = req.userid
+        const userid = req.userId
 
         const categoria = await sql.query`
-        SELECT Nome FROM Categoria
+        SELECT id, Nome as Categoria FROM Categoria
         WHERE UsuarioId = ${userid}
         `
         res.status(202).json(categoria.recordset)

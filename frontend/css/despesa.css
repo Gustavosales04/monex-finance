@@ -6,41 +6,200 @@
     font-family: Arial, sans-serif;
 }
 
+:root {
+    --green: #1b632a;
+    --green-light: #2f9a54;
+    --blue: #2f3f70;
+    --blue-soft: #e9eef8;
+    --background: #f4f7fb;
+    --surface: #ffffff;
+    --border: #dfe7ef;
+    --text: #1b2f44;
+    --text-muted: #66758a;
+    --shadow: 0 14px 36px rgba(25, 47, 68, 0.1);
+}
+
 /* Fundo */
 body {
-    background: linear-gradient(135deg, #1b632a, #2f3f70);
-    padding: 20px;
+    background: 
+        linear-gradient(135deg, rgba(27, 99, 42, 0.12), rgba(47, 63, 112, 0.14)),
+        var(--background);
+    min-height: 100vh;
+    color: var(--text);
 }
 
-/* Container */
-.container {
-    max-width: 600px;
-    margin: auto;
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
-/* Título */
-h1 {
-    color: #f4f2f2;
-    text-align: center;
-    padding: 15px;
+/* Topbar (Inspirado no Home) */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--green), var(--blue));
+    box-shadow: 0 10px 30px rgba(25, 47, 68, 0.16);
+    border-bottom: none;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: white;
+    font-size: 1.12rem;
+    font-weight: bold;
+}
+
+.brand-logo {
+    width: 52px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.16);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Layout Principal */
+.dashboard {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 90%;
+    padding-bottom: 3rem;
+}
+
+.section-header h1 {
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    font-size: 1.35rem;
 }
 
 /* Form */
-.form {
-    background: #f4f2f2;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
+.form-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    border: 1px solid var(--border);
+}
+
+.form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    background: #6d28d9;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background: #5b21b6;
 }
 
 /* Inputs */
-.form input {
+.form-card input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
     border-radius: 6px;
     border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.custom-combobox {
+    position: relative;
+}
+
+.combo-control {
+    display: flex;
+    gap: 10px;
+}
+
+.combo-control input {
+    flex: 1;
+    width: 100%;
+    margin-bottom: 0px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: white;
+}
+
+.combo-control button {
+    width: 36px !important;
+    height: 36px;
+    border: none;
+    border-radius: 6px;
+    background: #6d28d9;
+    color: white;
+    cursor: pointer;
+    transition: background .2s ease;
+}
+
+.combo-control button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.combo-dropdown {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 8px);
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.combo-dropdown.hidden {
+    display: none;
+}
+
+.combo-option {
+    padding: 10px 12px;
+    cursor: pointer;
+}
+
+.combo-option:hover {
+    background: #eef2ff;
+}
+
+.combo-option.create-option {
+    color: #4f46e5;
+    font-weight: 700;
 }
 
 /* Botão */
@@ -48,21 +207,62 @@ h1 {
     width: 100%;
     padding: 12px;
     border: none;
-    background: #4f46e5;
+    background: #6d28d9;
     color: white;
     border-radius: 6px;
     cursor: pointer;
+    transition: background .2s ease;
+}
+
+.form button + button {
+    margin-top: 10px;
+    background: #6d28d9;
 }
 
 .form button:hover {
     background: #3730a3;
 }
 
+.tabela-despesas {
+    width: 100%;
+    border-collapse: collapse;
+    background: #f4f2f2;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.tabela-despesas thead {
+    background: #4f46e5;
+    color: #f4f2f2;
+    align-items: center;
+    margin: auto;
+}
+
+.tabela-despesas th,
+.tabela-despesas td {
+    padding: 13px clamp(35px, 5%, 45px);;
+    text-align: left;
+    border-bottom: 2px solid #d3d5d8;
+    font-size: 0.95rem;
+}
+
+.tabela-despesas tbody tr:hover {
+    background: rgba(79,70,229,0.08);
+}
+
+.tabela-despesas tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela-despesas td:last-child {
+    width: 120px;
+}
+
 /* Lista */
 #lista-despesas {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: none;
 }
 
 /* Card de despesa */
@@ -89,7 +289,7 @@ h1 {
 
 /* Botão deletar */
 .delete {
-    background: red;
+    background: rgb(134, 12, 12);
     color: white;
     border: none;
     padding: 8px 12px;

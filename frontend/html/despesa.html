@@ -4,26 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/despesa.css">
-    <script src="../js/api.js"></script>
-    <script src="../js/despesa.js"></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/combobox.js" defer></script>
+    <script src="../js/despesa.js" defer></script>
     <title>Despesas</title>
 </head>
 <body>
-    <div class="container">
+    <div class="page">
+        <header class="topbar">
+            <div class="brand">
+                <img src="../logo.png" alt="Logo Monex" class="brand-logo">
+                <span>Monex</span>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="window.location.href = 'home.html'">Voltar</button>
+            </div>
+        </header>
 
-    <h1>Minhas Despesas</h1>
+        <main class="dashboard">
+            <section class="section-header">
+                <h1>Minhas Despesas</h1>
+            </section>
 
-    <!-- Formulário -->
-    <div class="form">
-        <input id="descricao" placeholder="Descrição">
-        <input id="valor" type="number" placeholder="Valor">
-        <input id="data" type="date">
-        <button onclick="cadastrardespesa()">Adicionar</button>
+            <div class="form-card">
+                <div class="form-grid">
+                    <input id="descricao" placeholder="Descrição">
+                    <div class="custom-combobox" id="categoria-combobox">
+                        <div class="combo-control">
+                            <input id="categoria-input" placeholder="Categoria">
+                            <button type="button" id="categoria-create-button" disabled>+</button>
+                        </div>
+                        <div class="combo-dropdown hidden" id="categoria-dropdown"></div>
+                    </div>
+                    <input id="valor" type="number" placeholder="Valor">
+                    <input id="data" type="date">
+                </div>
+                <button class="btn-primary" onclick="cadastrardespesa()">Adicionar Despesa</button>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="tabela-despesas">
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Categoria</th>
+                            <th>Valor</th>
+                            <th>Data</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo-tabela"></tbody>
+                </table>
+            </div>
+        </main>
     </div>
-
-    <!-- Lista -->
-    <div id="lista-despesas"></div>
-
-</div>
 </body>
 </html>

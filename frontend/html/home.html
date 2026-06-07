@@ -4,14 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/home.css">
-    <script src="../js/api.js"></script>
-    <title>Home</title>
+    <script src="../js/api.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+    <script src="../js/home.js" defer></script>
+    <title>Home - Monex</title>
 </head>
 <body>
-    <h1>Home</h1>
-    <div class="container">        
-        <h2>Em desenvolvimento</h2>
+    <div class="page">
+        <header class="topbar">
+            <div class="brand">
+                <img src="../logo.png" alt="Logo Monex" class="brand-logo">
+                <span>Monex</span>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="window.location.href = 'login.html'">Logout</button>
+                <button class="btn" onclick="window.location.href = 'despesa.html'">Despesas</button>
+            </div>
+        </header>
 
+        <main class="dashboard">
+            <section class="summary-grid" aria-label="Resumo financeiro">
+                <article class="summary-card">
+                    <span class="summary-label">Total gasto no mês</span>
+                    <strong class="summary-value">R$ 0,00</strong>
+                </article>
+
+                <article class="summary-card">
+                    <span class="summary-label">Quantidade de despesas</span>
+                    <strong class="summary-value">0</strong>
+                </article>
+
+                <article class="summary-card">
+                    <span class="summary-label">Categoria com maior gasto</span>
+                    <strong class="summary-value">-</strong>
+                </article>
+            </section>
+
+            <section class="overview-section" aria-labelledby="overview-title">
+                <div class="section-header">
+                    <h1 id="overview-title">Visão Geral</h1>
+                </div>
+
+                <div class="chart-grid">
+                    <article class="chart-card chart-card-large">
+                        <div class="evolution-chart-container">
+                            <canvas id="grafico-evolucao" aria-label="Evolução dos gastos no mês" role="img"></canvas>
+                            <p class="chart-empty-message" id="mensagem-grafico-evolucao">
+                                Nenhuma movimentação encontrada neste mês.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="chart-card">
+                        <div class="category-chart-container">
+                            <canvas id="grafico-categorias" aria-label="Gastos por categoria" role="img"></canvas>
+                            <p class="chart-empty-message" id="mensagem-grafico-categorias">
+                                Nenhuma despesa cadastrada neste mês.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="recent-expenses" aria-labelledby="recent-title">
+                <div class="section-header">
+                    <h2 id="recent-title">Despesas recentes</h2>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Valor</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-despesas-recentes">
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="recent-empty-message" id="mensagem-despesas-recentes">
+                    Nenhuma despesa cadastrada neste mês.
+                </p>
+
+                <div class="recent-footer">
+                    <button class="view-all-btn" type="button" onclick="window.location.href = 'despesa.html'" >Ver todas as despesas</button>
+                </div>
+            </section>
+        </main>
     </div>
 </body>
 </html>
